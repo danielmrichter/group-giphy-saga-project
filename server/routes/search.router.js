@@ -10,7 +10,7 @@ router.get(`/:id`, (req, res) => {
     axios.get(`https://api.giphy.com/v1/gifs/search?api_key=${api_key}&q=${searchWord}&limit=15`)
     .then((response) => {
         let gifList = response.data.data.map((gif)=>{return gif.images.original.url})
-        console.log('list of gif urls is:' ,gifList)
+        // console.log('list of gif urls is:' ,gifList)
         res.send(gifList)
     })
     .catch((error) => {
