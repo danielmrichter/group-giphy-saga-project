@@ -38,12 +38,32 @@ router.post("/", (req, res) => {
 // update a favorite's associated category
 router.put("/:id", (req, res) => {
   // req.body should contain a category_id to add to this favorite image
-  res.sendStatus(200);
+  const sqlText = `
+  UPDATE "favorites"
+ 	  SET "category_id" = $1
+  	WHERE "id" = $2;`;
+  const sqlValues = [req.body.category, req.body.id];
+  pool
+    .query(sqlText, sqlValues)
+    .then((dbRes) => res.sendStatus(200))
+    .catch((dbErr) => {
+      console.log(`Error in PUT/api/favorites! `, dbErr);
+      res.sendStatus(500);
+    });
 });
 
 // delete a favorite
 router.delete("/:id", (req, res) => {
-  res.sendStatus(200);
+  const sqlText = `
+  DELETE FROM "favorites"
+    WHERE "id" = $1`;
+  pool
+    .query(sqlText, req.params.id)
+    .then((dbRes) => res.sendStatus(200))
+    .catch((dbErr) => {
+      console.log(`Error Deleting favorite! `, dbErr);
+      res.sendStatus(500);
+    });
 });
 
 module.exports = router;
