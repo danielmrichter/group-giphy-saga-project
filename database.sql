@@ -27,6 +27,13 @@ INSERT INTO "categories"
 
 CREATE TABLE "favorites" (
   "id" SERIAL PRIMARY KEY,
-  "url" VARCHAR(100) NOT NULL,
+  "url" VARCHAR NOT NULL,
   "category_id" INTEGER REFERENCES "categories" ON DELETE CASCADE
 )
+
+INSERT INTO "favorites" 
+  ("url")
+  VALUES
+  ('https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG16cGV4aDVhaTQ0OHcyY2QzeTA0bHV0MXpnN2d6czltZnJvN2s2bCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/P2ofouG85BQWhXD8R8/giphy.webp'),
+  ('https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZm05cDFyamp2OHJreHMwaGZscXZmbG10dHFnNmRwZjZwb2c4Z3F2ZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/R6gvnAxj2ISzJdbA63/giphy.webp'),
+  ('https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGw4OXJnbGp5aDBvbHkzZzZtcTZwMHptdTM4dDBneGVhbTFmd3I2biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MUHNdrm3vk7MoyUsCO/giphy.webp');
