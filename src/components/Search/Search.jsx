@@ -2,6 +2,10 @@ import { useState } from "react";
 import SearchList from "./SearchList.jsx";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import {
+  Box,
+  Typography,
+} from "@mui/material";
 
 function Search() {
   let [searchTerm, setSearchTerm] = useState('');
@@ -19,6 +23,7 @@ function Search() {
 
   return (
     <div>
+      
       <form onSubmit={searchGiphy}>
         <input
           type="text"
