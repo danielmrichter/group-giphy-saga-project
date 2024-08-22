@@ -1,4 +1,5 @@
 import { HashRouter as Router, Route, Link } from "react-router-dom";
+import Favorites from "../Favorites/Favorites";
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
         {/* Search */}
       </Route>
       <Route exact path="/favorites">
-        {/* Favorites page */}
+        <Favorites />
       </Route>
     </Router>
   );
