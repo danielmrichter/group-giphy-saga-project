@@ -14,8 +14,9 @@ function* rootSaga() {
 function* searchGiphy (action) {
     try{
     console.log(action.payload)
-    yield axios.get(`/api/search/${action.payload}`)
-    yield put()
+    const gifResults = yield axios.get(`/api/search/${action.payload}`)
+    console.log('gifresults is:', gifResults)
+    yield put({type:'SET_GIFS', payload: gifResults.data})
 } catch (err) {
     console.log("error fetching gifs:", err);
 }}
@@ -24,13 +25,19 @@ function* searchGiphy (action) {
 const sagaMiddleware = createSagaMiddleware();
 
 //Reducers here:
-const giflist = (state=[], action) => {
-return state;
+const gifList = (state=[], action) => {
+    switch (action.type) {
+        case 'SET_GIFS':
+            let allTheGifs = action.payload;
+            return allTheGifs;
+        default:
+            return state;
+    }
 }
 
 const store = createStore(
     combineReducers({
-     giflist
+     gifList
     }),
     applyMiddleware(sagaMiddleware, logger)
   );

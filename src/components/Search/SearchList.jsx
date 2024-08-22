@@ -1,6 +1,21 @@
+import { useSelector } from "react-redux";
+
 function SearchList () {
+    const gifList = useSelector(store => store.gifList)
+    console.log('in SearchList. the gifList is: ',gifList)
+
     return (
-        <div>HERE IS THE LIST</div>
+        <div>
+            {gifList.map((gif)=> {
+                return (
+                <div>
+                    <img src={gif} /> 
+                    <button>Favorite</button>
+                    </div>
+                    )
+            })}
+            
+        </div>
     )
 }
 
