@@ -5,7 +5,7 @@ import { takeLatest, put } from "redux-saga/effects";
 import axios from "axios";
 
 function* rootSaga() {
-    yield takeLatest('SEARCH_GIPHY', searchGiphy)
+  yield takeLatest("SEARCH_GIPHY", searchGiphy);
   yield takeLatest("GET_FAVORITES", getFavorites);
   yield takeLatest("GET_CATEGORIES", getCategories);
   yield takeLatest("ADD_FAVORITE", addFavorite);
@@ -31,36 +31,36 @@ function* getCategories() {
 }
 function* addFavorite(action) {
   try {
-    yield axios.post('/api/favorites', {url: action.payload})
-    yield put({type: 'GET_FAVORITES'})
+    yield axios.post("/api/favorites", { url: action.payload });
+    yield put({ type: "GET_FAVORITES" });
   } catch (error) {
-    console.log(`Error adding favorite!`, error)
+    console.log(`Error adding favorite!`, error);
   }
 }
 
-function* searchGiphy (action) {
-    try{
-    console.log(action.payload)
-    const gifResults = yield axios.get(`/api/search/${action.payload}`)
-    console.log('gifresults is:', gifResults)
-    yield put({type:'SET_GIFS', payload: gifResults.data})
-} catch (err) {
+function* searchGiphy(action) {
+  try {
+    console.log(action.payload);
+    const gifResults = yield axios.get(`/api/search/${action.payload}`);
+    console.log("gifresults is:", gifResults);
+    yield put({ type: "SET_GIFS", payload: gifResults.data });
+  } catch (err) {
     console.log("error fetching gifs:", err);
-}}
-
+  }
+}
 
 const sagaMiddleware = createSagaMiddleware();
 
 //Reducers here:
-const gifList = (state=[], action) => {
-    switch (action.type) {
-        case 'SET_GIFS':
-            let allTheGifs = action.payload;
-            return allTheGifs;
-        default:
-            return state;
-    }
-}
+const gifList = (state = [], action) => {
+  switch (action.type) {
+    case "SET_GIFS":
+      let allTheGifs = action.payload;
+      return allTheGifs;
+    default:
+      return state;
+  }
+};
 
 const favoriteList = (state = [], action) => {
   switch (action.type) {
@@ -83,7 +83,7 @@ const store = createStore(
   combineReducers({
     favoriteList,
     categoryList,
-    gifList
+    gifList,
   }),
   applyMiddleware(sagaMiddleware, logger)
 );
