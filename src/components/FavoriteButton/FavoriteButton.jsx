@@ -5,5 +5,5 @@ export default function FavoriteButton({ url }) {
   const handleClick = () => {
     dispatch({ type: "ADD_FAVORITE", payload: url });
   };
-  return <button onClick={handleClick}></button>;
+  return <button onClick={handleClick}>Favorite</button>;
 }

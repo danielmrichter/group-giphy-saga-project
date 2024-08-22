@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import FavoriteButton from "../FavoriteButton/FavoriteButton.jsx";
 
 function SearchList () {
     const gifList = useSelector(store => store.gifList)
@@ -10,7 +11,7 @@ function SearchList () {
                 return (
                 <div>
                     <img src={gif} /> 
-                    <button>Favorite</button>
+                    <FavoriteButton url={gif} />
                     </div>
                     )
             })}
