@@ -31,7 +31,7 @@ export default function Favorites() {
         ))}
       </ul>
       <h2>Favorites</h2>
-      <Grid container columns={3} justifyContent="center">
+      <Grid container columns={3} columnGap={5} justifyContent="center">
         {favoriteList.map((favorite) => (
           <Card key={favorite.id} sx={{ maxWidth: 345 }}>
             <CardMedia
@@ -44,7 +44,6 @@ export default function Favorites() {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button size="small">Share</Button>
               <Button size="small" onClick={() => handleDelete(favorite.id)}>Delete</Button>
             </CardActions>
           </Card>
