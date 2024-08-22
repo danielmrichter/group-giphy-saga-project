@@ -1,4 +1,5 @@
 import { HashRouter as Router, Route, Link } from "react-router-dom";
+import Search from "../Search/Search.jsx";
 import Favorites from "../Favorites/Favorites";
 
 function App() {
@@ -8,7 +9,7 @@ function App() {
         <div>
           <h1>Giphy Search!</h1>
         </div>
-        {/* Search */}
+        <Search />
       </Route>
       <Route exact path="/favorites">
         <Favorites />
