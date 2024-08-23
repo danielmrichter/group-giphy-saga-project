@@ -9,6 +9,8 @@ function* rootSaga() {
   yield takeLatest("GET_FAVORITES", getFavorites);
   yield takeLatest("GET_CATEGORIES", getCategories);
   yield takeLatest("ADD_FAVORITE", addFavorite);
+  yield takeLatest("DELETE_FAVORITE", deleteFavorite);
+  yield takeLatest("SET_CATEGORY", actionFavorite);
 }
 
 // Generator Functions:
@@ -47,6 +49,10 @@ function* searchGiphy(action) {
   } catch (err) {
     console.log("error fetching gifs:", err);
   }
+}
+function* deleteFavorite(action) {
+  yield axios.delete(`/api/favorites/${action.payload}`);
+  yield put({ type: "GET_FAVORITES" });
 }
 
 const sagaMiddleware = createSagaMiddleware();
@@ -87,6 +93,18 @@ const store = createStore(
   }),
   applyMiddleware(sagaMiddleware, logger)
 );
+
+function* actionFavorite(action) {
+  try {
+    console.log(action.payload)
+    yield axios.put(`/api/favorites/${action.payload.id}`, {
+      category: action.payload.category,
+    });
+    yield put({ type: "GET_FAVORITES" });
+  } catch (error) {
+    console.log("ERROR", error);
+  }
+}
 
 sagaMiddleware.run(rootSaga);
 

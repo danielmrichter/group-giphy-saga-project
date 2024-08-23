@@ -6,7 +6,9 @@ const router = express.Router();
 // return all favorite images
 router.get("/", (req, res) => {
   const queryText = `
-  SELECT * FROM "favorites"
+SELECT "favorites".id, "url", "favorites".category_id, "categories"."name" AS "categoryName", "categories"."id" AS "categoryId" FROM "favorites"
+ 	LEFT JOIN "categories"
+ 	ON "categories".id = "favorites".category_id;
   `;
   pool
     .query(queryText)
@@ -42,7 +44,7 @@ router.put("/:id", (req, res) => {
   UPDATE "favorites"
  	  SET "category_id" = $1
   	WHERE "id" = $2;`;
-  const sqlValues = [req.body.category, req.body.id];
+  const sqlValues = [req.body.category, req.params.id];
   pool
     .query(sqlText, sqlValues)
     .then((dbRes) => res.sendStatus(200))
