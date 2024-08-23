@@ -5,6 +5,7 @@ import axios from "axios";
 import {
   Box,
   Typography,
+  TextField, Button
 } from "@mui/material";
 
 function Search() {
@@ -25,16 +26,22 @@ function Search() {
     <div>
       
       <form onSubmit={searchGiphy}>
-        <input
+      <Box display="flex" flexDirection="column" alignItems="center">  
+        <TextField
+        label="Enter Search"
+        sx={{
+          marginBottom: 2
+        }}
           type="text"
           value={searchTerm}
           onChange={(event) => {
             setSearchTerm(event.target.value);
           }}
-          placeholder="Enter Search Term"
-        />
-        <button>Submit</button>
+        > </TextField>
+        <Button variant="contained" color="secondary" type="submit">Submit</Button>
+      </Box>
       </form>
+      
       <SearchList />
     </div>
   );
