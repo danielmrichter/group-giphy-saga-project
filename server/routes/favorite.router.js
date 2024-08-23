@@ -8,7 +8,8 @@ router.get("/", (req, res) => {
   const queryText = `
 SELECT "favorites".id, "url", "favorites".category_id, "categories"."name" AS "categoryName", "categories"."id" AS "categoryId" FROM "favorites"
  	LEFT JOIN "categories"
- 	ON "categories".id = "favorites".category_id;
+ 	ON "categories".id = "favorites".category_id
+  ORDER BY "favorites".id;
   `;
   pool
     .query(queryText)
@@ -60,7 +61,7 @@ router.delete("/:id", (req, res) => {
   DELETE FROM "favorites"
     WHERE "id" = $1`;
   pool
-    .query(sqlText, req.params.id)
+    .query(sqlText, [req.params.id])
     .then((dbRes) => res.sendStatus(200))
     .catch((dbErr) => {
       console.log(`Error Deleting favorite! `, dbErr);
