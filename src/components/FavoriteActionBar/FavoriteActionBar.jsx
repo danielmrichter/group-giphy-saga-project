@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 export default function FavoriteActionBar({ favorite }) {
   const dispatch = useDispatch();
   const categoryList = useSelector((store) => store.categoryList);
-  const [currentCategory, setCurrentCategory] = useState(favorite.name);
+  const [currentCategory, setCurrentCategory] = useState(favorite.categoryId);
   const handleCategorySelect = (e) => {
     dispatch({
       type: "SET_CATEGORY",
